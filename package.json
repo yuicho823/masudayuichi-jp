@@ -1,0 +1,7 @@
+{
+  "name": "masudayuichi-jp",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp index.html style.css dist/"
+  }
+}
