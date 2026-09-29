@@ -2,9 +2,6 @@
   "name": "masudayuichi-jp",
   "private": true,
   "scripts": {
-    "build": "node build.mjs"
-  },
-  "dependencies": {
-    "adm-zip": "^0.5.16"
+    "build": "rm -rf dist && mkdir -p dist && unzip -q site.zip -d dist"
   }
 }
