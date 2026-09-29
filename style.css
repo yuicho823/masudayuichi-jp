@@ -9,3 +9,5 @@
   .hero .copy{font-size:16px;line-height:1.85}
   .hero .btn{margin-top:14px}
 }
+
+.blog-count{font-size:13px;color:var(--muted);margin-top:18px}.blog-card{display:flex;flex-direction:column;min-height:250px;transition:transform .2s ease,box-shadow .2s ease}.blog-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.06)}.blog-card h3{flex:1}.readmore{font-size:13px;font-weight:700;margin-top:12px}.new-badge{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;background:var(--accent);color:var(--ink);font-size:9px;font-weight:800;letter-spacing:.08em}.blog-list{padding-top:52px}@media(max-width:760px){.blog-hero{padding-bottom:42px}.blog-list{padding-top:28px}.blog-card{min-height:auto;padding:22px}.blog-card h3{font-size:20px}.blog-card .copy{font-size:14px}.readmore{margin-top:8px}}
