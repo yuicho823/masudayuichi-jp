@@ -1,7 +1,6 @@
 {
-  "name": "masudayuichi-jp",
-  "private": true,
-  "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && cp index.html style.css dist/"
-  }
+  "name":"masudayuichi-jp",
+  "private":true,
+  "type":"module",
+  "scripts":{"build":"node build.mjs"}
 }
