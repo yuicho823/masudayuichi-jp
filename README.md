@@ -7,3 +7,6 @@
 - 株式会社ヒカリスター出版: https://hikaristar.com/
 
 The deployable static site is packaged in `site.zip` and extracted to `dist/` during the Vercel build.
+
+
+Deployment trigger: 2026-09-29
