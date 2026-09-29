@@ -1,0 +1,10 @@
+{
+  "name": "masudayuichi-jp",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
+}
