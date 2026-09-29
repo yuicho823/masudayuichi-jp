@@ -1,46 +1,11 @@
-import fs from "node:fs";
-import path from "node:path";
-
-const out="dist";
-fs.rmSync(out,{recursive:true,force:true});
-fs.mkdirSync(out,{recursive:true});
-
-for (const file of ["index.html","style.css","robots.txt","sitemap.xml","404.html"]) {
-  if (fs.existsSync(file)) fs.copyFileSync(file,path.join(out,file));
-}
-for (const dir of ["blog","profile","images"]) {
-  if (fs.existsSync(dir)) fs.cpSync(dir,path.join(out,dir),{recursive:true});
-}
-const cat=n=>{
-  if([3,13,21,32,41,42,45].includes(n)) return "ai";
-  if([4,5,11,12,17,18,19,23,24,29,33,35,37,49].includes(n)) return "welfare";
-  if([6,28,42,43,47,48,49,50].includes(n)) return "region";
-  if([16,20,25,26,30,34,36,38,40,44,46].includes(n)) return "publishing";
-  if([2,10,14,22,27,39,45].includes(n)) return "business";
-  return "life";
-};
-for(let n=1;n<=70;n++){
-  const id=String(n).padStart(2,"0");
-  const file=path.join(out,"blog",id,"index.html");
-  if(!fs.existsSync(file)) continue;
-  let html=fs.readFileSync(file,"utf8");
-  const c=cat(n);
-  const image="/images/blog/"+c+".svg";
-  const title=((html.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||"増田裕一ブログ").replace(/<[^>]+>/g,"");
-  if(!html.includes('class="article-cover"')){
-    html=html.replace('<article class="article">',`<figure class="article-cover"><img src="${image}" alt="増田裕一｜${title}" loading="eager"></figure><article class="article">`);
-  }
-  if(!html.includes('property="og:image"')){
-    html=html.replace('</head>',`<meta property="og:image" content="https://masudayuichi.jp${image}"><meta name="twitter:card" content="summary_large_image"></head>`);
-  }
-  if(!html.includes('href="https://hikaristar.com/"')){
-    html=html.replace('</nav>','<a href="https://hikaristar.com/">COMPANY</a></nav>');
-  }
-  const prev=n>1?String(n-1).padStart(2,"0"):null;
-  const next=n<70?String(n+1).padStart(2,"0"):null;
-  const nav=`<nav class="article-nav">${prev?`<a href="/blog/${prev}/">← 前の記事</a>`:"<span></span>"}<a class="all-articles" href="/blog/">記事一覧</a>${next?`<a href="/blog/${next}/">次の記事 →</a>`:"<span></span>"}</nav>`;
-  if(!html.includes('class="article-nav"')){
-    html=html.replace('</article>',nav+'</article>');
-  }
-  fs.writeFileSync(file,html);
-}
+import fs from "node:fs";import path from "node:path";
+const out="dist";fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
+for(const f of ["index.html","style.css","robots.txt","404.html"]){if(fs.existsSync(f))fs.copyFileSync(f,path.join(out,f));}
+for(const d of ["blog","profile","images"]){if(fs.existsSync(d))fs.cpSync(d,path.join(out,d),{recursive:true});}
+const cats=n=>n>=101&&n<=110?"ai":n>=111&&n<=120?"publishing":n>=121&&n<=130?"welfare":n>=131&&n<=140?"region":n>=141&&n<=150?"business":n>=151&&n<=170?"region":n>=171&&n<=180?"publishing":"life";
+const meta=[];
+for(let n=1;n<=200;n++){const id=String(n).padStart(2,"0");const f=path.join(out,"blog",id,"index.html");if(!fs.existsSync(f))continue;let h=fs.readFileSync(f,"utf8");const title=((h.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||("ARTICLE "+n)).replace(/<[^>]+>/g,"");meta.push({n,id,title});const image="/images/blog/"+cats(n)+".svg";if(!h.includes('class="article-cover"'))h=h.replace('<article class="article">',`<figure class="article-cover"><img src="${image}" alt="増田裕一｜${title}" loading="eager"></figure><article class="article">`);if(!h.includes('property="og:image"'))h=h.replace("</head>",`<meta property="og:image" content="https://masudayuichi.jp${image}"><meta name="twitter:card" content="summary_large_image"></head>`);if(!h.includes('href="https://hikaristar.com/"'))h=h.replace("</nav>",'<a href="https://hikaristar.com/">COMPANY</a></nav>');if(!h.includes('class="article-nav"')){const p=n>1?String(n-1).padStart(2,"0"):null,q=n<200?String(n+1).padStart(2,"0"):null;h=h.replace("</article>",`<nav class="article-nav">${p?`<a href="/blog/${p}/">← 前の記事</a>`:"<span></span>"}<a class="all-articles" href="/blog/">記事一覧</a>${q?`<a href="/blog/${q}/">次の記事 →</a>`:"<span></span>"}</nav></article>`);}fs.writeFileSync(f,h);}
+meta.sort((a,b)=>b.n-a.n);
+const cards=meta.map(x=>`<article class="card blog-card"><div class="meta">ARTICLE ${x.n} ${x.n>190?'<span class="new-badge">NEW</span>':""}</div><h3><a href="/blog/${x.id}/">${x.title}</a></h3><p class="copy">増田裕一が実体験や現場で得た学びをもとに、価値提供を目的としてまとめています。</p><a class="readmore" href="/blog/${x.id}/">記事を読む →</a></article>`).join("");
+const index=`<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>増田裕一ブログ｜AI・福祉・地域・事業づくり</title><meta name="description" content="増田裕一の公式ブログ。出版、AI、介護・福祉、地域、経営、働き方など200記事を掲載。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://masudayuichi.jp/blog/"><link rel="stylesheet" href="/style.css"></head><body><header><div class="wrap nav"><a class="brand" href="/">増田裕一 公式サイト</a><nav><a href="/profile/">PROFILE</a><a href="/blog/">BLOG</a><a href="https://hikaristar.com/">COMPANY</a></nav></div></header><main><section class="hero blog-hero"><div class="wrap"><div class="eyebrow">OFFICIAL BLOG</div><h1>増田裕一ブログ</h1><p class="copy">出版、AI、介護・福祉、地域、事業づくり。現場で得た経験を、価値提供を軸に発信しています。</p><p class="blog-count">現在 ${meta.length}記事</p></div></section><section class="blog-list"><div class="wrap"><div class="grid">${cards}</div></div></section></main><footer><div class="wrap">© Yuichi Masuda</div></footer></body></html>`;fs.writeFileSync(path.join(out,"blog","index.html"),index);
+const urls=["/","/profile/","/blog/",...meta.slice().sort((a,b)=>a.n-b.n).map(x=>"/blog/"+x.id+"/")];const sm='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls.map(u=>'<url><loc>https://masudayuichi.jp'+u+'</loc></url>').join("")+"</urlset>";fs.writeFileSync(path.join(out,"sitemap.xml"),sm);
