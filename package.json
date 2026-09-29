@@ -2,6 +2,6 @@
   "name": "masudayuichi-jp",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && unzip -q site.zip -d dist"
+    "build": "rm -rf dist && mkdir -p dist && python3 -m zipfile -e site.zip dist"
   }
 }
