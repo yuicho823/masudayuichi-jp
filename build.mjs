@@ -26,11 +26,21 @@ for(let n=1;n<=50;n++){
   let html=fs.readFileSync(file,"utf8");
   const c=cat(n);
   const image="/images/blog/"+c+".svg";
+  const title=((html.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||"増田裕一ブログ").replace(/<[^>]+>/g,"");
   if(!html.includes('class="article-cover"')){
-    html=html.replace('<article class="article">',`<figure class="article-cover"><img src="${image}" alt="増田裕一の記事イメージ" loading="eager"></figure><article class="article">`);
+    html=html.replace('<article class="article">',`<figure class="article-cover"><img src="${image}" alt="増田裕一｜${title}" loading="eager"></figure><article class="article">`);
   }
   if(!html.includes('property="og:image"')){
     html=html.replace('</head>',`<meta property="og:image" content="https://masudayuichi.jp${image}"><meta name="twitter:card" content="summary_large_image"></head>`);
+  }
+  if(!html.includes('href="https://hikaristar.com/"')){
+    html=html.replace('</nav>','<a href="https://hikaristar.com/">COMPANY</a></nav>');
+  }
+  const prev=n>1?String(n-1).padStart(2,"0"):null;
+  const next=n<50?String(n+1).padStart(2,"0"):null;
+  const nav=`<nav class="article-nav">${prev?`<a href="/blog/${prev}/">← 前の記事</a>`:"<span></span>"}<a class="all-articles" href="/blog/">記事一覧</a>${next?`<a href="/blog/${next}/">次の記事 →</a>`:"<span></span>"}</nav>`;
+  if(!html.includes('class="article-nav"')){
+    html=html.replace('</article>',nav+'</article>');
   }
   fs.writeFileSync(file,html);
 }
