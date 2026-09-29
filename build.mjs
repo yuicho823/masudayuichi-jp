@@ -19,7 +19,7 @@ const cat=n=>{
   if([2,10,14,22,27,39,45].includes(n)) return "business";
   return "life";
 };
-for(let n=1;n<=60;n++){
+for(let n=1;n<=70;n++){
   const id=String(n).padStart(2,"0");
   const file=path.join(out,"blog",id,"index.html");
   if(!fs.existsSync(file)) continue;
@@ -37,7 +37,7 @@ for(let n=1;n<=60;n++){
     html=html.replace('</nav>','<a href="https://hikaristar.com/">COMPANY</a></nav>');
   }
   const prev=n>1?String(n-1).padStart(2,"0"):null;
-  const next=n<60?String(n+1).padStart(2,"0"):null;
+  const next=n<70?String(n+1).padStart(2,"0"):null;
   const nav=`<nav class="article-nav">${prev?`<a href="/blog/${prev}/">← 前の記事</a>`:"<span></span>"}<a class="all-articles" href="/blog/">記事一覧</a>${next?`<a href="/blog/${next}/">次の記事 →</a>`:"<span></span>"}</nav>`;
   if(!html.includes('class="article-nav"')){
     html=html.replace('</article>',nav+'</article>');
