@@ -61,3 +61,55 @@ if(fs.existsSync(builtSitemap)){
   xml+="</urlset>";
   fs.writeFileSync(builtSitemap,xml);
 }
+
+
+// CATEGORY_BLOG_INDEX_V2
+// Rebuild the blog index after every article has been generated so that
+// all 200 articles appear once, grouped into reader-friendly categories.
+{
+  const broadCategories=[
+    {key:"ai",label:"AI・生成AI",desc:"生成AIの実務活用、業務改善、研修、AI時代の仕事について。"},
+    {key:"publishing",label:"出版・情報発信",desc:"出版、文章、ブログ、SNS、Web発信、SEOについて。"},
+    {key:"welfare",label:"介護・福祉",desc:"介護・障害福祉、現場運営、採用、人材育成について。"},
+    {key:"region",label:"地域・地方創生",desc:"地域づくり、コミュニティ、観光、地域企業について。"},
+    {key:"business",label:"経営・事業づくり",desc:"中小企業、事業開発、採用、顧客、経営判断について。"},
+    {key:"global",label:"北欧・海外・教育",desc:"北欧、海外視察、教育、学び、文化の違いについて。"},
+    {key:"food",label:"農業・食",desc:"農業、食、地域経済、食育について。"},
+    {key:"life",label:"働き方・学び",desc:"働き方、生き方、学び、経験の振り返りについて。"}
+  ];
+  const normalizeCategory=(title,html)=>{
+    const text=(title+" "+html.replace(/<[^>]+>/g," ")).toLowerCase();
+    if(/農業|農産|食育|地域の食|直売所|畑|作物/.test(text)) return "food";
+    if(/北欧|海外|視察|教育|子ども|学びの場|学校/.test(text)) return "global";
+    if(/介護|福祉|重度訪問|デイサービス|利用者|支援|ヘルパー/.test(text)) return "welfare";
+    if(/ai|生成ai|人工知能/.test(text)) return "ai";
+    if(/出版|本を|書籍|文章|ブログ|sns|seo|web|ホームページ|情報発信|発信/.test(text)) return "publishing";
+    if(/地域|地方創生|観光|コミュニティ|まち|移住/.test(text)) return "region";
+    if(/経営|事業|中小企業|採用|顧客|売上|会社|ビジネス|商談/.test(text)) return "business";
+    return "life";
+  };
+  const all=[];
+  for(let n=1;n<=200;n++){
+    const id=String(n).padStart(2,"0");
+    const file=path.join(out,"blog",id,"index.html");
+    if(!fs.existsSync(file)) continue;
+    const html=fs.readFileSync(file,"utf8");
+    const title=((html.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||("ARTICLE "+n)).replace(/<[^>]+>/g,"");
+    all.push({n,id,title,category:normalizeCategory(title,html)});
+  }
+  all.sort((a,b)=>b.n-a.n);
+  const card=x=>`<article class="card blog-card category-card"><div class="meta">ARTICLE ${x.n}${x.n>190?' <span class="new-badge">NEW</span>':''}</div><h3><a href="/blog/${x.id}/">${esc(x.title)}</a></h3><p class="copy">増田裕一が実体験や現場で得た学びをもとにまとめています。</p><a class="readmore" href="/blog/${x.id}/">記事を読む →</a></article>`;
+  const latest=all.slice(0,8).map(card).join("");
+  const chips=broadCategories.map(c=>{
+    const count=all.filter(x=>x.category===c.key).length;
+    return `<a class="category-chip" href="#category-${c.key}"><span>${c.label}</span><b>${count}</b></a>`;
+  }).join("");
+  const sections=broadCategories.map(c=>{
+    const items=all.filter(x=>x.category===c.key);
+    if(!items.length) return "";
+    return `<section class="category-section" id="category-${c.key}"><div class="wrap"><div class="category-heading"><div><div class="eyebrow">CATEGORY</div><h2>${c.label}</h2><p>${c.desc}</p></div><span class="category-count">${items.length}記事</span></div><div class="grid category-grid">${items.map(card).join("")}</div><a class="back-categories" href="#categories">↑ カテゴリ一覧へ戻る</a></div></section>`;
+  }).join("");
+  const categoryJson=JSON.stringify(broadCategories.map(c=>({"@type":"CollectionPage","name":c.label,"url":"https://masudayuichi.jp/blog/#category-"+c.key})));
+  const index=`<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>増田裕一ブログ｜AI・福祉・地域・出版・事業づくり</title><meta name="description" content="増田裕一の公式ブログ。AI、出版・情報発信、介護・福祉、地域・地方創生、経営、北欧・教育、農業・食、働き方のカテゴリ別に200記事を掲載。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://masudayuichi.jp/blog/"><link rel="stylesheet" href="/style.css"><script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Blog","name":"増田裕一ブログ","url":"https://masudayuichi.jp/blog/","author":{"@type":"Person","name":"増田裕一","url":"https://masudayuichi.jp/profile/"}})}</script></head><body><header><div class="wrap nav"><a class="brand" href="/">増田裕一 公式サイト</a><nav><a href="/profile/">PROFILE</a><a href="/blog/">BLOG</a><a href="https://hikaristar.com/">COMPANY</a></nav></div></header><main><section class="hero blog-hero"><div class="wrap"><div class="eyebrow">OFFICIAL BLOG</div><h1>増田裕一ブログ</h1><p class="copy">出版、AI、介護・福祉、地域、事業づくり。現場で得た経験を、読む人の学びにつながる形で発信しています。</p><p class="blog-count">現在 ${all.length}記事</p></div></section><section class="category-nav-section" id="categories"><div class="wrap"><div class="category-nav-head"><div><div class="eyebrow">EXPLORE</div><h2>カテゴリから読む</h2></div><p>気になるテーマから記事を探せます。</p></div><div class="category-chips">${chips}</div></div></section><section class="latest-section"><div class="wrap"><div class="category-heading"><div><div class="eyebrow">LATEST</div><h2>新着記事</h2><p>最近追加した記事から8本を表示しています。</p></div></div><div class="grid latest-grid">${latest}</div></div></section>${sections}</main><footer><div class="wrap">© Yuichi Masuda</div></footer></body></html>`;
+  fs.writeFileSync(path.join(out,"blog","index.html"),index);
+}
