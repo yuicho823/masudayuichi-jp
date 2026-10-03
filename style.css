@@ -59,9 +59,9 @@
 
 /* Balanced typography for the personal media */
 .hero{padding:76px 0 62px}
-.hero h1{font-family:inherit;font-size:clamp(42px,5vw,64px);line-height:1.35;letter-spacing:.015em;margin:14px 0 20px;overflow-wrap:anywhere}
+.hero h1{font-size:clamp(42px,5vw,64px);line-height:1.35;letter-spacing:.015em;margin:14px 0 20px;overflow-wrap:anywhere}
 .lead{font-size:clamp(18px,2vw,22px);line-height:1.75}
-h2{font-family:inherit;font-size:clamp(28px,3.5vw,42px);line-height:1.4;margin-bottom:26px;overflow-wrap:anywhere}
+h2{font-size:clamp(28px,3.5vw,42px);line-height:1.4;margin-bottom:26px;overflow-wrap:anywhere}
 .card h3{font-size:21px;line-height:1.6}
 .article-hero h1{font-size:clamp(30px,3.8vw,46px);line-height:1.5;overflow-wrap:anywhere}
 .category-nav-head h2,.category-heading h2{font-size:clamp(26px,3vw,36px);line-height:1.4}
