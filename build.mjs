@@ -113,3 +113,27 @@ if(fs.existsSync(builtSitemap)){
   const index=`<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>増田裕一ブログ｜AI・福祉・地域・出版・事業づくり</title><meta name="description" content="増田裕一の公式ブログ。AI、出版・情報発信、介護・福祉、地域・地方創生、経営、北欧・教育、農業・食、働き方のカテゴリ別に200記事を掲載。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://masudayuichi.jp/blog/"><link rel="stylesheet" href="/style.css"><script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Blog","name":"増田裕一ブログ","url":"https://masudayuichi.jp/blog/","author":{"@type":"Person","name":"増田裕一","url":"https://masudayuichi.jp/profile/"}})}</script></head><body><header><div class="wrap nav"><a class="brand" href="/">増田裕一 公式サイト</a><nav><a href="/profile/">PROFILE</a><a href="/blog/">BLOG</a><a href="https://hikaristar.com/">COMPANY</a></nav></div></header><main><section class="hero blog-hero"><div class="wrap"><div class="eyebrow">OFFICIAL BLOG</div><h1>増田裕一ブログ</h1><p class="copy">出版、AI、介護・福祉、地域、事業づくり。現場で得た経験を、読む人の学びにつながる形で発信しています。</p><p class="blog-count">現在 ${all.length}記事</p></div></section><section class="category-nav-section" id="categories"><div class="wrap"><div class="category-nav-head"><div><div class="eyebrow">EXPLORE</div><h2>カテゴリから読む</h2></div><p>気になるテーマから記事を探せます。</p></div><div class="category-chips">${chips}</div></div></section><section class="latest-section"><div class="wrap"><div class="category-heading"><div><div class="eyebrow">LATEST</div><h2>新着記事</h2><p>最近追加した記事から8本を表示しています。</p></div></div><div class="grid latest-grid">${latest}</div></div></section>${sections}</main><footer><div class="wrap">© Yuichi Masuda</div></footer></body></html>`;
   fs.writeFileSync(path.join(out,"blog","index.html"),index);
 }
+
+// Keep the official person identity and author channel consistent in built articles.
+const officialChannel = "https://www.youtube.com/@yuichimasuda";
+for (const entry of fs.readdirSync(path.join(out, "blog"), {withFileTypes:true})) {
+  if (!entry.isDirectory()) continue;
+  const file = path.join(out, "blog", entry.name, "index.html");
+  if (!fs.existsSync(file)) continue;
+  let html = fs.readFileSync(file, "utf8");
+  html = html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g, (_, open, raw, close) => {
+    const data = JSON.parse(raw);
+    function visit(value) {
+      if (!value || typeof value !== "object") return;
+      if (value["@type"] === "Person" && value.name === "増田裕一") {
+        value["@id"] = "https://masudayuichi.jp/#person";
+        value.sameAs = [...new Set([...(value.sameAs || []), officialChannel])];
+      }
+      Object.values(value).forEach(visit);
+    }
+    visit(data);
+    return open + JSON.stringify(data) + close;
+  });
+  if (html.includes('class="author"')) html = html.replace(/(<div class="author">[\s\S]*?)(<\/div>)/, '$1<p><a href="' + officialChannel + '">増田裕一 公式YouTube</a></p>$2');
+  fs.writeFileSync(file, html);
+}
