@@ -80,3 +80,6 @@ h2,.category-nav-head h2,.category-heading h2{font-size:26px;line-height:1.45;ma
 .article h2{font-size:23px;line-height:1.55}
 .article>p:first-child{font-size:16px}.btn{font-size:14px;line-height:1.6;max-width:100%}
 }
+
+/* SITE SEARCH */
+.site-search{padding:54px 0;background:#fff;border-top:1px solid var(--line)}.site-search h2{margin:5px 0 20px}.search-box{display:flex;align-items:center;gap:12px;max-width:760px;border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:0 18px}.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(233,138,170,.12)}.search-box span{font-size:24px;color:var(--muted)}.search-box input{width:100%;border:0;outline:0;background:transparent;padding:17px 0;font:inherit;font-size:16px;color:var(--ink)}.search-status{margin:12px 2px 0;color:var(--muted);font-size:13px}[hidden]{display:none!important}@media(max-width:760px){.site-search{padding:38px 0}.search-box{border-radius:12px;padding:0 14px}.search-box input{font-size:16px;padding:15px 0}}
