@@ -1,4 +1,5 @@
 import generatedArticles from "./articles-101-200.mjs";
+import { createHash } from "node:crypto";
 import fs from "node:fs";import path from "node:path";
 const out="dist";fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 for(const f of ["index.html","style.css","robots.txt","404.html"]){if(fs.existsSync(f))fs.copyFileSync(f,path.join(out,f));}
@@ -135,5 +136,37 @@ for (const entry of fs.readdirSync(path.join(out, "blog"), {withFileTypes:true})
     return open + JSON.stringify(data) + close;
   });
   if (html.includes('class="author"')) html = html.replace(/(<div class="author">[\s\S]*?)(<\/div>)/, '$1<p><a href="' + officialChannel + '">増田裕一 公式YouTube</a></p>$2');
+  fs.writeFileSync(file, html);
+}
+
+// Editorial paragraph decisions are explicit per article. Never split by length.
+// Keep this after generation so rebuilding cannot overwrite the reviewed layout.
+const articleLayouts = JSON.parse(fs.readFileSync("article-layout.json", "utf8"));
+for (const [id, layout] of Object.entries(articleLayouts)) {
+  const file = path.join(out, "blog", id.padStart(2, "0"), "index.html");
+  let html = fs.readFileSync(file, "utf8");
+  html = html.replace(/(<article class="article">)([\s\S]*?)(<div class="author">)/, (_, open, body, author) => {
+    const paragraphs = [...body.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(match => match[1]);
+    const hash = createHash("sha256").update(paragraphs.join("")).digest("hex");
+    if (hash !== layout.bodySha256) throw new Error(`Article ${id} changed: review its paragraph layout before publishing.`);
+    let index = 0;
+    const formatted = body.replace(/<p>([\s\S]*?)<\/p>/g, (_, text) => {
+      const paragraphIndex = index++;
+      const edit = layout.paragraphs.find(entry => entry.index === paragraphIndex);
+      if (!edit) return `<p>${text}</p>`;
+      const parts = [];
+      let rest = text;
+      for (const phrase of edit.before) {
+        const position = rest.indexOf(phrase);
+        if (position <= 0) throw new Error(`Invalid editorial boundary in article ${id}`);
+        parts.push(rest.slice(0, position));
+        rest = rest.slice(position);
+      }
+      parts.push(rest);
+      if (parts.join("") !== text) throw new Error(`Article ${id} text was altered`);
+      return parts.map(part => `<p${edit.keypoint ? ' class="article-keypoint"' : ""}>${part}</p>`).join("\n");
+    });
+    return open + formatted + author;
+  });
   fs.writeFileSync(file, html);
 }
