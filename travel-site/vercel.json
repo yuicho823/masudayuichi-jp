@@ -98,5 +98,6 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node build-seo.mjs --check"
+  "buildCommand": "node build-seo.mjs --check",
+  "outputDirectory": "."
 }
