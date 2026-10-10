@@ -103,3 +103,20 @@ h2,.category-nav-head h2,.category-heading h2{font-size:26px;line-height:1.45;ma
   .article > p { margin-bottom: 1.65em; }
   .article h2 { margin-top: 2.5em; margin-bottom: 1em; }
 }
+
+
+/* Zeroichi series (articles 201–230): mobile-friendly editorial reading layout */
+.zeroichi-article { max-width: 680px; }
+.zeroichi-article > p { margin: 0 0 1.4em; }
+.zeroichi-article h2 { margin: 2.25em 0 .9em; }
+.zeroichi-article h3 { margin: 1.8em 0 .75em; }
+@media (max-width:760px) {
+  .zeroichi-article {
+    font-size: 16px;
+    line-height: 1.95;
+    letter-spacing: .012em;
+  }
+  .zeroichi-article > p { margin: 0 0 1.35em; }
+  .zeroichi-article h2 { margin: 2.1em 0 .8em; font-size: 22px; line-height: 1.5; }
+  .zeroichi-article h3 { margin: 1.55em 0 .7em; font-size: 18px; line-height: 1.55; }
+}
