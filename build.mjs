@@ -170,3 +170,6 @@ for (const [id, layout] of Object.entries(articleLayouts)) {
   });
   fs.writeFileSync(file, html);
 }
+
+// Build the 30 new-era / zeroichi SEO articles after existing 200 articles.
+await import('./articles-201-230-build.mjs');
