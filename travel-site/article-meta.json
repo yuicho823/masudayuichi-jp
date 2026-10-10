@@ -1,0 +1,297 @@
+{
+  "blog/001/index.html": {
+    "status": "archive"
+  },
+  "blog/002/index.html": {
+    "status": "archive"
+  },
+  "blog/003/index.html": {
+    "status": "archive"
+  },
+  "blog/004/index.html": {
+    "status": "archive"
+  },
+  "blog/005/index.html": {
+    "status": "archive"
+  },
+  "blog/006/index.html": {
+    "status": "archive"
+  },
+  "blog/007/index.html": {
+    "status": "archive"
+  },
+  "blog/008/index.html": {
+    "status": "archive"
+  },
+  "blog/009/index.html": {
+    "status": "archive"
+  },
+  "blog/010/index.html": {
+    "status": "unverified"
+  },
+  "blog/011/index.html": {
+    "status": "unverified"
+  },
+  "blog/012/index.html": {
+    "status": "archive"
+  },
+  "blog/013/index.html": {
+    "status": "archive"
+  },
+  "blog/014/index.html": {
+    "status": "archive"
+  },
+  "blog/015/index.html": {
+    "status": "archive"
+  },
+  "blog/016/index.html": {
+    "status": "archive"
+  },
+  "blog/017/index.html": {
+    "status": "archive"
+  },
+  "blog/018/index.html": {
+    "status": "archive"
+  },
+  "blog/019/index.html": {
+    "status": "archive"
+  },
+  "blog/020/index.html": {
+    "status": "archive"
+  },
+  "blog/021/index.html": {
+    "status": "archive"
+  },
+  "blog/022/index.html": {
+    "status": "archive"
+  },
+  "blog/023/index.html": {
+    "status": "archive"
+  },
+  "blog/024/index.html": {
+    "status": "archive"
+  },
+  "blog/025/index.html": {
+    "status": "archive"
+  },
+  "blog/026/index.html": {
+    "status": "archive"
+  },
+  "blog/027/index.html": {
+    "status": "archive"
+  },
+  "blog/028/index.html": {
+    "status": "archive"
+  },
+  "blog/029/index.html": {
+    "status": "archive"
+  },
+  "blog/030/index.html": {
+    "status": "archive"
+  },
+  "blog/031/index.html": {
+    "status": "archive"
+  },
+  "blog/032/index.html": {
+    "status": "archive"
+  },
+  "blog/033/index.html": {
+    "status": "archive"
+  },
+  "blog/034/index.html": {
+    "status": "archive"
+  },
+  "blog/035/index.html": {
+    "status": "archive"
+  },
+  "blog/036/index.html": {
+    "status": "archive"
+  },
+  "blog/037/index.html": {
+    "status": "archive"
+  },
+  "blog/038/index.html": {
+    "status": "archive"
+  },
+  "blog/039/index.html": {
+    "status": "archive"
+  },
+  "blog/040/index.html": {
+    "status": "archive"
+  },
+  "blog/041/index.html": {
+    "status": "archive"
+  },
+  "blog/042/index.html": {
+    "status": "archive"
+  },
+  "blog/043/index.html": {
+    "status": "archive"
+  },
+  "blog/044/index.html": {
+    "status": "archive"
+  },
+  "blog/045/index.html": {
+    "status": "archive"
+  },
+  "blog/046/index.html": {
+    "status": "archive"
+  },
+  "blog/047/index.html": {
+    "status": "archive"
+  },
+  "blog/048/index.html": {
+    "status": "verified",
+    "modifiedDate": "2026-10-01",
+    "verifiedDate": "2026-10-10",
+    "sources": [
+      "https://www.ana.co.jp/ja/jp/guide/amc/award/domestic/terms/"
+    ],
+    "verificationNotes": "2026-10-10にANA公式の2026年5月19日以降の直行1区間4距離区分の必要マイル（L/R/H）、往復合算、シーズン→距離→チャートの手順とシミュレーターを本文と照合。一致。",
+    "bodySha256": "777215013cbf13cd395e5702e73f0463a5b139cbc58e41412249a3eed65fa7b5",
+    "modifiedDateEvidence": "既存BlogPostingの2026-10-01を維持。GitHub記事別履歴にも2026-10-01のPublish 2026 current guideコミットがある。今回のSEO表示追加日を本文更新日に転用しない。"
+  },
+  "blog/049/index.html": {
+    "status": "verified",
+    "modifiedDate": "2026-10-01",
+    "verifiedDate": "2026-10-10",
+    "sources": [
+      "https://www.ana.co.jp/en/jp/guide/amc/award/international/terms/"
+    ],
+    "verificationNotes": "2026-10-10にANA公式の発着ゾーン・シーズン・搭乗クラス、2025年6月24日発券以降の改定を本文と照合。一致。",
+    "bodySha256": "60d1fc8abecf904f9ae5e713cb3c61df69309235e85cc813d664d97e29074ea1",
+    "modifiedDateEvidence": "既存BlogPostingの2026-10-01を維持。GitHub記事別履歴にも2026-10-01のPublish 2026 current guideコミットがある。今回のSEO表示追加日を本文更新日に転用しない。"
+  },
+  "blog/050/index.html": {
+    "status": "verified",
+    "modifiedDate": "2026-10-01",
+    "verifiedDate": "2026-10-10",
+    "sources": [
+      "https://www.ana.co.jp/ja/jp/guide/amc/milleage_group/"
+    ],
+    "verificationNotes": "2026-10-10にANA公式の口座グループ、減算順、ダイヤモンド資格終了後36カ月、ミリオンマイラーの取扱い、口座残高での確認を本文と照合。一致。",
+    "bodySha256": "a827e7f4fbb6743b53c86ee49deb594817499f73217499c05f0a1834bf37483b",
+    "modifiedDateEvidence": "既存BlogPostingの2026-10-01を維持。GitHub記事別履歴にも2026-10-01のPublish 2026 current guideコミットがある。今回のSEO表示追加日を本文更新日に転用しない。"
+  },
+  "blog/051/index.html": {
+    "status": "verified",
+    "modifiedDate": "2026-10-01",
+    "verifiedDate": "2026-10-10",
+    "sources": [
+      "https://www.ana.co.jp/ja/jp/amc/signup/",
+      "https://www.ana.co.jp/ja/jp/guide/amc/award/domestic/terms/",
+      "https://www.ana.co.jp/ja/jp/guide/amc/milleage_group/"
+    ],
+    "verificationNotes": "2026-10-10にANA公式の会員登録と、特典航空券必要マイル確認、買い物・搭乗等の積算、有効期限・口座グループを照合。5ステップは著者の手順提案として維持。",
+    "bodySha256": "b9eaa46b5ecc1e62ebf7fe56afc5e02de7744ca61df31a88b7c3c522551237ef",
+    "modifiedDateEvidence": "既存BlogPostingの2026-10-01を維持。GitHub記事別履歴にも2026-10-01のPublish 2026 current guideコミットがある。今回のSEO表示追加日を本文更新日に転用しない。"
+  },
+  "lesson/01/index.html": {
+    "status": "archive"
+  },
+  "lesson/02/index.html": {
+    "status": "archive"
+  },
+  "lesson/03/index.html": {
+    "status": "archive"
+  },
+  "lesson/04/index.html": {
+    "status": "archive"
+  },
+  "lesson/05/index.html": {
+    "status": "archive"
+  },
+  "lesson/06/index.html": {
+    "status": "archive"
+  },
+  "lesson/07/index.html": {
+    "status": "archive"
+  },
+  "lesson/16/index.html": {
+    "status": "archive"
+  },
+  "lesson/17/index.html": {
+    "status": "archive"
+  },
+  "lesson/18/index.html": {
+    "status": "archive"
+  },
+  "lesson/19/index.html": {
+    "status": "archive"
+  },
+  "lesson/20/index.html": {
+    "status": "archive"
+  },
+  "lesson/21/index.html": {
+    "status": "archive"
+  },
+  "lesson/22/index.html": {
+    "status": "archive"
+  },
+  "lesson/23/index.html": {
+    "status": "archive"
+  },
+  "lesson/24/index.html": {
+    "status": "archive"
+  },
+  "lesson/25/index.html": {
+    "status": "archive"
+  },
+  "lesson/27/index.html": {
+    "status": "archive"
+  },
+  "lesson/28/index.html": {
+    "status": "archive"
+  },
+  "lesson/29/index.html": {
+    "status": "archive"
+  },
+  "lesson/30/index.html": {
+    "status": "archive"
+  },
+  "lesson/31/index.html": {
+    "status": "archive"
+  },
+  "lesson/32/index.html": {
+    "status": "archive"
+  },
+  "lesson/33/index.html": {
+    "status": "archive"
+  },
+  "lesson/34/index.html": {
+    "status": "archive"
+  },
+  "lesson/35/index.html": {
+    "status": "archive"
+  },
+  "lesson/36/index.html": {
+    "status": "archive"
+  },
+  "lesson/37/index.html": {
+    "status": "archive"
+  },
+  "lesson/38/index.html": {
+    "status": "archive"
+  },
+  "lesson/39/index.html": {
+    "status": "archive"
+  },
+  "lesson/40/index.html": {
+    "status": "archive"
+  },
+  "lesson/41/index.html": {
+    "status": "archive"
+  },
+  "lesson/42/index.html": {
+    "status": "archive"
+  },
+  "lesson/43/index.html": {
+    "status": "archive"
+  },
+  "lesson/44/index.html": {
+    "status": "archive"
+  },
+  "lesson/45/index.html": {
+    "status": "archive"
+  }
+}
