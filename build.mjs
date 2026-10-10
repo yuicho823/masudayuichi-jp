@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";import path from "node:path";
 const out="dist";fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 for(const f of ["index.html","style.css","robots.txt","404.html"]){if(fs.existsSync(f))fs.copyFileSync(f,path.join(out,f));}
-for(const d of ["blog","profile","images"]){if(fs.existsSync(d))fs.cpSync(d,path.join(out,d),{recursive:true});}
+for(const d of ["blog","profile","contact","images"]){if(fs.existsSync(d))fs.cpSync(d,path.join(out,d),{recursive:true});}
 const cats=n=>n>=101&&n<=110?"ai":n>=111&&n<=120?"publishing":n>=121&&n<=130?"welfare":n>=131&&n<=140?"region":n>=141&&n<=150?"business":n>=151&&n<=170?"region":n>=171&&n<=180?"publishing":"life";
 const meta=[];
 for(let n=1;n<=200;n++){const id=String(n).padStart(2,"0");const f=path.join(out,"blog",id,"index.html");if(!fs.existsSync(f))continue;let h=fs.readFileSync(f,"utf8");const title=((h.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||("ARTICLE "+n)).replace(/<[^>]+>/g,"");meta.push({n,id,title});const image="/images/blog/"+cats(n)+".svg";if(!h.includes('class="article-cover"'))h=h.replace('<article class="article">',`<figure class="article-cover"><img src="${image}" alt="増田裕一｜${title}" loading="eager"></figure><article class="article">`);if(!h.includes('property="og:image"'))h=h.replace("</head>",`<meta property="og:image" content="https://masudayuichi.jp${image}"><meta name="twitter:card" content="summary_large_image"></head>`);if(!h.includes('href="https://hikaristar.com/"'))h=h.replace("</nav>",'<a href="https://hikaristar.com/">COMPANY</a></nav>');if(!h.includes('class="article-nav"')){const p=n>1?String(n-1).padStart(2,"0"):null,q=n<200?String(n+1).padStart(2,"0"):null;h=h.replace("</article>",`<nav class="article-nav">${p?`<a href="/blog/${p}/">← 前の記事</a>`:"<span></span>"}<a class="all-articles" href="/blog/">記事一覧</a>${q?`<a href="/blog/${q}/">次の記事 →</a>`:"<span></span>"}</nav></article>`);}fs.writeFileSync(f,h);}
@@ -173,3 +173,7 @@ for (const [id, layout] of Object.entries(articleLayouts)) {
 
 // Build the 30 new-era / zeroichi SEO articles after existing 200 articles.
 await import('./articles-201-230-build.mjs');
+
+// Apply one shared footer after all article generators have completed.
+const { applyFooter } = await import('./footer.mjs');
+applyFooter(out);
