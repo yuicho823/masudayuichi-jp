@@ -177,3 +177,22 @@ await import('./articles-201-230-build.mjs');
 // Apply one shared footer after all article generators have completed.
 const { applyFooter } = await import('./footer.mjs');
 applyFooter(out);
+
+
+// BLOG_231_INDEX_AND_SITEMAP
+// The dedicated original article lives at blog/231/index.html and is copied above.
+{
+  const file = path.join(out, "blog", "index.html");
+  let html = fs.readFileSync(file, "utf8");
+  const newCard = '<article class="card blog-card category-card"><div class="meta">ARTICLE 231 <span class="new-badge">NEW</span></div><h3><a href="/blog/231/">増田裕一について検索された方へ｜ネットの情報との向き合い方</a></h3><p class="copy">評判や口コミを調べるときに、情報の出どころと事実を確かめる大切さについて書きました。</p><a class="readmore" href="/blog/231/">記事を読む →</a></article>';
+  if (!html.includes('href="/blog/231/"')) {
+    html = html.replace('<div class="grid latest-grid">', '<div class="grid latest-grid">' + newCard);
+    html = html.replace(/現在 (\\d+)記事/, (_, n) => '現在 ' + (Number(n)+1) + '記事');
+    html = html.replace(/(\\d+)記事から絞り込めます。/, (_,n) => (Number(n)+1) + '記事から絞り込めます。');
+    fs.writeFileSync(file,html);
+  }
+  const sitemap = path.join(out,"sitemap.xml");
+  let xml=fs.readFileSync(sitemap,"utf8");
+  if(!xml.includes('/blog/231/'))xml=xml.replace('</urlset>','<url><loc>https://masudayuichi.jp/blog/231/</loc><lastmod>2026-10-15</lastmod></url></urlset>');
+  fs.writeFileSync(sitemap,xml);
+}
