@@ -187,8 +187,8 @@ applyFooter(out);
   const newCard = '<article class="card blog-card category-card"><div class="meta">ARTICLE 231 <span class="new-badge">NEW</span></div><h3><a href="/blog/231/">増田裕一について検索された方へ｜ネットの情報との向き合い方</a></h3><p class="copy">評判や口コミを調べるときに、情報の出どころと事実を確かめる大切さについて書きました。</p><a class="readmore" href="/blog/231/">記事を読む →</a></article>';
   if (!html.includes('href="/blog/231/"')) {
     html = html.replace('<div class="grid latest-grid">', '<div class="grid latest-grid">' + newCard);
-    html = html.replace(/現在 (\\d+)記事/, (_, n) => '現在 ' + (Number(n)+1) + '記事');
-    html = html.replace(/(\\d+)記事から絞り込めます。/, (_,n) => (Number(n)+1) + '記事から絞り込めます。');
+    html = html.replace(/現在 (\d+)記事/, (_, n) => '現在 ' + (Number(n)+1) + '記事');
+    html = html.replace(/(\d+)記事から絞り込めます。/, (_,n) => (Number(n)+1) + '記事から絞り込めます。');
     fs.writeFileSync(file,html);
   }
   const sitemap = path.join(out,"sitemap.xml");
