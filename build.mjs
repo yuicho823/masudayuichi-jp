@@ -196,3 +196,20 @@ applyFooter(out);
   if(!xml.includes('/blog/231/'))xml=xml.replace('</urlset>','<url><loc>https://masudayuichi.jp/blog/231/</loc><lastmod>2026-10-15</lastmod></url></urlset>');
   fs.writeFileSync(sitemap,xml);
 }
+
+
+// BLOG_232_INDEX_AND_SITEMAP
+{
+ const indexFile=path.join(out,"blog","index.html");
+ let html=fs.readFileSync(indexFile,"utf8");
+ const card='<article class="card blog-card category-card"><div class="meta">ARTICLE 232 <span class="new-badge">NEW</span></div><h3><a href="/blog/232/">口コミ・評判はどう作る？出版で信頼を築く7つのメリット</a></h3><p class="copy">出版による信頼形成、口コミ・評判、個人ブランディングとSEOの考え方を解説します。</p><a class="readmore" href="/blog/232/">記事を読む →</a></article>';
+ if(!html.includes('href="/blog/232/"')){
+  html=html.replace('<div class="grid latest-grid">','<div class="grid latest-grid">'+card);
+  html=html.replace(/現在 (\d+)記事/,(_,n)=>'現在 '+(Number(n)+1)+'記事');
+  html=html.replace(/(\d+)記事から絞り込めます。/,(_,n)=>(Number(n)+1)+'記事から絞り込めます。');
+  fs.writeFileSync(indexFile,html);
+ }
+ const sm=path.join(out,"sitemap.xml");let xml=fs.readFileSync(sm,"utf8");
+ if(!xml.includes('/blog/232/'))xml=xml.replace('</urlset>','<url><loc>https://masudayuichi.jp/blog/232/</loc><lastmod>2026-10-16</lastmod></url></urlset>');
+ fs.writeFileSync(sm,xml);
+}
