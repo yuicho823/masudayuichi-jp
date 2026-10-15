@@ -202,7 +202,7 @@ applyFooter(out);
 {
  const indexFile=path.join(out,"blog","index.html");
  let html=fs.readFileSync(indexFile,"utf8");
- const card='<article class="card blog-card category-card"><div class="meta">ARTICLE 232 <span class="new-badge">NEW</span></div><h3><a href="/blog/232/">口コミ・評判はどう作る？出版で信頼を築く7つのメリット</a></h3><p class="copy">出版による信頼形成、口コミ・評判、個人ブランディングとSEOの考え方を解説します。</p><a class="readmore" href="/blog/232/">記事を読む →</a></article>';
+ const card='<article class="card blog-card category-card"><div class="meta">ARTICLE 232 <span class="new-badge">NEW</span></div><h3><a href="/blog/232/">出版とWeb集客をつなぐ実践設計｜90日計画と公開前チェックリスト</a></h3><p class="copy">出版後の導線設計、90日間の実行計画、計測指標と公開前チェックリストを紹介します。</p><a class="readmore" href="/blog/232/">記事を読む →</a></article>';
  if(!html.includes('href="/blog/232/"')){
   html=html.replace('<div class="grid latest-grid">','<div class="grid latest-grid">'+card);
   html=html.replace(/現在 (\d+)記事/,(_,n)=>'現在 '+(Number(n)+1)+'記事');
