@@ -4,7 +4,7 @@ import path from "node:path";
 const profiles = [
   ["公式YouTube", "https://www.youtube.com/@yuichimasuda"],
   ["note", "https://note.com/yuicho823"],
-  ["LinkedIn", "https://www.linkedin.com/in/yuichimasuda823"],
+  ["LinkedIn", "https://www.linkedin.com/in/masudayuichi823/"],
   ["Wantedly", "https://www.wantedly.com/id/yuichi_masuda_c"],
 ];
 const external = (label, href) => `<a href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${label}（新しいタブで開きます）">${label}</a>`;
