@@ -4,3 +4,4 @@
 
 .photo-caption{position:absolute;right:25px;bottom:75px;font-size:9px;color:#fff;background:#293c5080;padding:3px 8px;border-radius:4px;letter-spacing:.03em}.legacy-content a,.copy{overflow-wrap:anywhere}.activity-grid>*,.journal-grid>*,.vision>*,.profile>*{min-width:0}img{max-width:100%}@media(max-width:760px){.photo-caption{bottom:52px;right:12px;font-size:8px}.site-nav{gap:8px 16px}.site-nav a{min-height:30px;display:inline-flex!important;align-items:center}.site-brand{font-size:17px}.article-nav a{overflow-wrap:anywhere}}
 @media(max-width:760px){.presentation-page .hero h1{font-size:clamp(26px,7.7vw,36px);letter-spacing:.02em;line-height:1.65}}
+.presentation-page h2,.presentation-page h3{font-family:inherit}@media(max-width:760px){.presentation-page main>section:first-child h2{font-size:clamp(22px,6.4vw,30px)!important;line-height:1.8}}
