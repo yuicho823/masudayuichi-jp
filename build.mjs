@@ -229,3 +229,6 @@ applyFooter(out);
  if(!xml.includes('/publishing/'))xml=xml.replace('</urlset>','<url><loc>https://masudayuichi.jp/publishing/</loc><lastmod>2026-10-17</lastmod></url></urlset>');
  fs.writeFileSync(sm,xml);
 }
+
+// Apply the shared visual design after all content and SEO generators.
+await import('./redesign/apply.mjs');
