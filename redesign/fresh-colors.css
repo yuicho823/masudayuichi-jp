@@ -1,0 +1,22 @@
+/* Fresh palette: sky blue, blush pink and warm orange. */
+:root{--ink:#293c50;--muted:#758494;--line:#e3e9ef;--green:#5c96bb}
+.pill{background:linear-gradient(110deg,#73bce3 0%,#a8bde7 38%,#e9b9ce 70%,#f3c093 100%)}
+.hero:after{background:linear-gradient(90deg,#fff 3%,#fffffff2 25%,#ffffffa3 44%,#ffffff00 75%)}
+.hero .pill{background:linear-gradient(110deg,#66abd5,#82bce0);box-shadow:0 8px 25px #75afd51a}
+.hero{background:radial-gradient(ellipse at 0 0,#edf8ff66,transparent 60%)}
+.eyebrow,.jp,.tag,.activity .sub,.activity .num{color:#598db0}
+.activities{background:linear-gradient(115deg,#edf7fe 0%,#fbf4f8 55%,#fff5ea 100%)}
+.activity{border-top-color:#a8cde4}
+.activity:nth-child(2){border-top-color:#e8b7ca}
+.activity:nth-child(2) .num,.activity:nth-child(2) .sub{color:#bb7995}
+.activity:nth-child(3){border-top-color:#eac09b}
+.activity:nth-child(3) .num,.activity:nth-child(3) .sub{color:#ba8861}
+.feature{background:radial-gradient(ellipse at 100% 0,#f6cfb0,transparent 60%),linear-gradient(135deg,#e4f3ff,#f8eaf1);border:1px solid #e5eaf0}
+.feature .large{color:#729fca}
+.profile{background:linear-gradient(115deg,#f0f8ff,#fcf2f6 60%,#fff5eb)}
+.contact{background:linear-gradient(110deg,#e5f3ff,#f6eaf4 56%,#ffeddf);color:var(--ink);border:1px solid #e3e8ef}
+.contact p{color:#6c7f91}
+.contact a{color:#fff;background:linear-gradient(110deg,#6aaed5,#a2b4db 45%,#d7a8c0);border:0}
+.text-link{border-bottom-color:#abc9df}.newsbar b{color:#ce956c}.preview{background:#f0f7fc;color:#7d91a3}
+a:focus-visible{outline:3px solid #8dbbde;outline-offset:5px}
+@media(max-width:760px){.hero:after{background:linear-gradient(180deg,#fff 25%,#ffffffc9 50%,#ffffff00)}}
